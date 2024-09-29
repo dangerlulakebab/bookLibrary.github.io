@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+    transition: all 0.33s ease;
+}
+
+div {
+    color: white;
+}
+
+::backdrop {
+    opacity: 1;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 100px 50px;
+    gap: 20px
+}
+
+form label {
+    font-size: 25px;
+}
+
+form input {
+    height: 25px;
+    width: 400px;
+}
+
+form button:not {
+    transform: translateY(100px);
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(204, 141, 81);
+    padding: 50px;
+}
+
+.logo {
+    font-size: 5vh;
+    margin: 10px;
+}
+
+button:not(.remove) {
+    border: none;
+    background-color: rgb(43, 43, 190);
+    color: white;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 2.5vh;
+    cursor: pointer;
+}
+
+.library {
+    padding: 20px;
+    display: flex;
+    gap: 35px;
+}
+
+.book {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 350px;
+    background-color: rgb(18, 47, 71);
+}
+
+.title {
+    font-size: 4vh;
+}
+
+.author {
+    font-size: 2vh;
+    margin: 25px;
+}
+
+.read {
+    display: flex;
+    flex-direction: row;
+}
+
+.read input {
+    width: 50px;
+}
+
+.remove {
+    border: none;
+    background-color: rgb(43, 43, 190);
+    color: white;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    transform: translateY(-50px);
+}
