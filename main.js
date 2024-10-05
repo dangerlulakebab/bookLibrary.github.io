@@ -1,12 +1,54 @@
+class Book {
+    constructor(title, author, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    createBookElement() {
+        const bookDiv = document.createElement('div');
+        bookDiv.classList.add('book');
+        bookDiv.innerHTML = `
+        <div class="title">${this.title}</div>
+            <div class="author">${this.author}</div>
+            <div class="pages">${this.pages}</div>
+            <form class='read'>
+                <label for="">Read</label>
+                <input type="checkbox" ${this.isRead ? 'checked' : ''}>
+            </form>
+            <button class="remove">Remove</button>
+        `;
+        return bookDiv;
+    }
+}
+
+class library {
+    constructor() {
+        this.library = document.querySelector('.library');
+    }
+
+    addBook(book) {
+        const bookElement = book.createBookElement();
+        this.library.appendChild(bookElement);
+
+        bookElement.querySelector('.remove').addEventListener('click', () => {
+            this.removeBook(bookElement);
+        });
+    }
+
+    removeBook(bookElement){
+        this.library.removeChild(bookElement)
+    }
+}
+
+const myLibrary = new library();
+
 const dialog = document.querySelector('dialog');
 const showButton = document.querySelector('dialog + button')
 const closeButton = document.querySelector('button[type="submit"]');
 const bookForm = document.querySelector('form');
-const library = document.querySelector('.library');
 
-showButton.addEventListener('click', () => {
-    dialog.showModal();
-})
 
 bookForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -16,31 +58,18 @@ bookForm.addEventListener('submit', (event) => {
     const pages = document.querySelector('#pages').value;
     const isRead = document.querySelector('#isRead').checked
 
-    addBookToLibrary(title, author, pages, isRead)
+    const newBook = new Book(title, author, pages, isRead)
+    myLibrary.addBook(newBook)
     
     dialog.close();
 });
 
 
-function addBookToLibrary(title, author, pages, isRead) {
-    const bookDiv = document.createElement('div');
-    bookDiv.classList.add('book');
-    bookDiv.innerHTML = `
-    <div class="title">${title}</div>
-        <div class="author">${author}</div>
-        <div class="pages">${pages}</div>
-        <form class='read'>
-            <label for="">Read</label>
-            <input type="checkbox" ${isRead ? 'checked' : ''}>
-        </form>
-        <button class="remove">Remove</button>
-    `;
+showButton.addEventListener('click', () => {
+    dialog.showModal();
+})
 
-    library.appendChild(bookDiv)
 
-    bookDiv.querySelector('.remove').addEventListener('click', () => {
-        library.removeChild(bookDiv)
-    })
-}
+const initialBook = new Book('name', 'title', 'pages', true)
 
-addBookToLibrary('name', 'author', 'pages', true);
+myLibrary.addBook(initialBook);
